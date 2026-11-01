@@ -1,0 +1,94 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing and linting caches
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Datasets and large data files (DO NOT COMMIT)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+*.csv
+*.tsv
+*.pcap
+*.pcapng
+*.parquet
+*.jsonl
+
+# Model binaries and weights (DO NOT COMMIT)
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.bin
+*.pte
+*.onnx
+*.tflite
+models/*
+!models/.gitkeep
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Internal Team Guides, Briefs & Study Materials (DO NOT COMMIT)
+*.pdf
+*.docx
+*.doc
+*.pptx
+*.xlsx
+*.xls
+*Team_Guide*
+*PRD*
+docs/human_registration_instructions.md
+notes/
+learning/
+internal/
+scratch/
+
+
