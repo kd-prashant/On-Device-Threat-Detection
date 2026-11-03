@@ -27,3 +27,16 @@ In accordance with PRD Section 8 (Academic Integrity and Tutor AI Policy Disclos
   * Created documentation registries: `docs/decisions.md`, `docs/data_sources.md`, and `docs/ai_usage_log.md`.
 * **Human Action:** Provided approval to start WP0 and verified the setup.
 
+### Entry 003 - Work Package 1 (Learn and Plan)
+* **Date:** 2026-11-03
+* **Phase:** WP1 (Learn and Plan)
+* **User Prompt:** "lets' move to the phase 1.....take ur proper time do carefully everything and also one more thing u have to make a separette file for purpose of each phase so that which i and my teammeber can read (don't upload that in github)..."
+* **Agent Contribution:**
+  * Researched threat mechanics, distinguishing features, and false-positive/negative tradeoffs for URL phishing, SMS smishing, and network intrusions; authored `docs/threat_explainers.md`.
+  * Synthesized official PyTorch ExecuTorch documentation, detailing AOT graph capture, EXIR lowering, 4-bit Groupwise quantization, and mobile RAM budgets; authored `docs/executorch_summary.md`.
+  * Shortlisted benchmark datasets (UCI SMS Spam, PhishTank/Tranco, NSL-KDD) with license terms and class distribution analyses; authored `docs/dataset_shortlist.md`.
+  * Recorded architectural decisions 005 and 006 in `docs/decisions.md`.
+  * Created local non-committed team guide `TEAM_EXPLAINER_AND_VIVA_GUIDE.md` explaining Phase 0 and Phase 1 in plain English for team members and viva preparation.
+* **Human Action:** Reviewed deliverables and authorized progression to Phase 2.
+
+

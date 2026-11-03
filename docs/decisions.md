@@ -57,3 +57,31 @@ In compliance with the project PRD (Section 3, Rule 3), changes to architecture,
 * **Consequences:**
   Guarantees robust defense against prompt injection attacks.
 
+---
+
+## Decision 005: Selection of Benchmark Datasets
+* **Date:** 2026-11-03
+* **Status:** Accepted (WP1 Milestone)
+* **Context:**
+  Reliable, reproducible, and legally unencumbered public datasets are required to train the three classical detectors without infringing user privacy.
+* **Decision:**
+  * SMS Scam: UCI SMS Spam Collection (CC BY 4.0).
+  * Phishing URL: PhishTank & Tranco aggregated feed (Open Research).
+  * Network Intrusion: NSL-KDD (Public Academic, UNB).
+* **Consequences:**
+  Zero personal data is used; all data is strictly public research benchmark material.
+
+---
+
+## Decision 006: ExecuTorch Quantization Specification (4-bit Groupwise)
+* **Date:** 2026-11-03
+* **Status:** Accepted (WP1 Feasibility)
+* **Context:**
+  Deploying Llama 3.2 1B in FP16 requires ~2.5 GB RAM, which would cause out-of-memory terminations on 4GB-6GB mobile phones.
+* **Decision:**
+  Adopt 4-bit Groupwise Quantization (Int4 with group size 128) lowered to the XNNPACK engine for Arm Cortex-A processors.
+* **Consequences:**
+  * Model weight size reduced to ~750 MB.
+  * Total peak runtime memory capped at ~1.03 GB, fitting safely within mobile OS headroom.
+
+
