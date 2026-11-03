@@ -8,7 +8,7 @@
 [![LLM](https://img.shields.io/badge/Reasoning-Llama%203.2%201B%20Instruct-0467DF?style=for-the-badge&logo=meta&logoColor=white)](https://ai.meta.com/llama/)
 [![Runtime](https://img.shields.io/badge/Engine-ExecuTorch%20%284--bit%29-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/executorch/)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline%20%7C%20Air--Gapped-10B981?style=for-the-badge&logo=shield&logoColor=white)]()
-[![Code Quality](https://img.shields.io/badge/Quality-Black%20%2B%20Ruff%20%2B%20Pytest-blueviolet?style=for-the-badge)](tests/)
+[![Code Quality](https://img.shields.io/badge/Tests-14%20Passed%20%7C%20100%25-brightgreen?style=for-the-badge)](tests/)
 
 <br>
 
@@ -19,8 +19,9 @@
 
 [Key Features](#-key-features) •
 [Architecture](#-system-architecture) •
-[Interactive Demo](#-threat-telemetry-preview) •
-[Quickstart](#-quickstart--installation) •
+[Threat Preview](#-threat-telemetry-preview) •
+[Datasets & Partitions](#-datasets--stratified-splits) •
+[Quickstart](#-quickstart--reproduction) •
 [Project Roadmap](#-work-package-roadmap)
 
 ---
@@ -141,33 +142,51 @@ Extracted Signals:
 
 ---
 
+## 📊 Datasets & Stratified Splits
+
+All benchmark datasets are public academic resources, preprocessed offline and partitioned with a locked seed (`seed = 42`) into **80% Train**, **10% Validation**, and **10% Held-Out Test** sets:
+
+| Threat Domain | Benchmark Dataset | Total Samples | Train (80%) | Val (10%) | Test (Held-Out) | Class Balance |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|
+| **SMS Smishing** | [UCI SMS Spam](docs/dataset_shortlist.md#1-sms-spam--smishing-dataset) | **5,572** | 4,457 | 557 | 558 | 13.4% Scam (Natural distribution) |
+| **Phishing URLs** | [Curated Benchmark](docs/dataset_shortlist.md#2-phishing-url-dataset) | **11,429** | 9,143 | 1,143 | 1,143 | 50.0% Phishing (Balanced) |
+| **Network Intrusion** | [NSL-KDD](docs/dataset_shortlist.md#3-network-anomaly--intrusion-dataset) | **45,000** | 34,000 | 6,000 | 5,000 | 47.7% Attack (Standard KDDTest+) |
+
+*Zero data leakage is verified through automated unit tests (`test_zero_data_leakage`). Full details in [docs/data_splits_summary.md](docs/data_splits_summary.md).*
+
+---
+
 ## 📁 Repository Layout
 
 ```text
 ├── src/
-│   ├── detectors/          # Ultra-lightweight ML inference engines
-│   │   ├── url/            # Phishing URL lexical & entropy extractors
-│   │   ├── sms/            # SMS scam & smishing NLP classifiers
-│   │   └── network/        # PCAP flow & network intrusion analyzers
-│   ├── explainer/          # Llama 3.2 ExecuTorch runtime & prompt sandbox
-│   │   ├── prompts/        # Hardened prompt templates (anti-injection)
-│   │   └── runtime.py      # ExecuTorch Python/C++ binding wrapper
+│   ├── detectors/          # Ultra-lightweight ML inference engines (WP3)
+│   ├── explainer/          # Llama 3.2 ExecuTorch runtime & prompt sandbox (WP4)
 │   ├── pipeline/           # Central telemetry router and verdict aggregator
 │   ├── ui/                 # Terminal UI & on-device preview interfaces
-│   └── utils/              # Data preprocessing, tokenization, metrics
+│   └── utils/              # Data engineering & feature extraction engines
+│       ├── download_data.py        # Automated ingestion from public repositories
+│       ├── url_features.py         # 18 offline lexical & Shannon entropy extractors
+│       ├── sms_preprocessor.py     # Scam linguistics & psychological urgency metrics
+│       ├── network_preprocessor.py # 41 NSL-KDD flow features & attack taxonomies
+│       └── data_loader.py          # Stratified splitting (80/10/10) with locked seed
 ├── benchmarks/             # Latency, memory, and energy benchmark harness
 ├── deploy/                 # ExecuTorch export scripts & Android integration
-├── docs/                   # Architectural Decision Records (ADRs) & specs
-│   ├── decisions.md        # Architecture records (Model selection, 4-bit quantization)
-│   └── data_sources.md     # Public datasets register & license compliance
-└── tests/                  # Automated pytest verification testbed
+├── docs/                   # Architectural Decision Records & Technical Specifications
+│   ├── threat_explainers.md        # Technical breakdown of 3 threat vectors
+│   ├── executorch_summary.md       # ExecuTorch compilation & 4-bit memory budget
+│   ├── dataset_shortlist.md        # Official dataset catalog & license compliance
+│   ├── data_splits_summary.md      # Data cleaning, balance audits, and partition stats
+│   ├── decisions.md                # Architectural Decision Records (ADRs 001 - 006)
+│   └── ai_usage_log.md             # Academic integrity & assistant usage log
+└── tests/                  # Automated pytest verification testbed (14 tests passing)
 ```
 
 ---
 
-## 🚀 Quickstart & Installation
+## 🚀 Quickstart & Reproduction
 
-### 1. Clone & Set Up Virtual Environment
+### 1. Clone & Set Up Environment
 
 ```bash
 # Clone the repository
@@ -182,20 +201,27 @@ python -m venv .venv
 
 # Activate (Linux / macOS)
 source .venv/bin/activate
-```
 
-### 2. Install Dependencies
-
-```bash
+# Install pinned dependencies
 pip install -r requirements.txt
 ```
 
-### 3. Verify System Health
+### 2. Download Data & Prepare Splits (Reproducible)
 
-Run the 1-click test suite and quality audit:
+Run the automated data pipeline with a single command:
+
+```bash
+# Step A: Download raw benchmark datasets
+python -m src.utils.download_data
+
+# Step B: Extract features and generate stratified 80/10/10 splits
+python -m src.utils.data_loader
+```
+
+### 3. Verify Code Quality & Run Tests
 
 ```powershell
-# Windows PowerShell
+# Windows PowerShell (1-Click Quality Runner)
 .\check.ps1
 
 # Windows CMD
@@ -211,10 +237,10 @@ pytest && ruff check . && black --check .
 
 | Work Package | Focus Area | Status | Deliverables |
 |:---|:---|:---:|:---|
-| **WP0** | **Project Setup & Architecture Scaffolding** | **Complete** ✅ | Quality suite, directory layout, git configs |
-| **WP1** | **Threat Modeling & ExecuTorch Feasibility** | **In Progress** ⏳ | Threat explainers, 4-bit quantization specs |
-| **WP2** | **Dataset Pipeline & Hardened Splits** | Upcoming 📅 | UCI SMS, PhishTank, NSL-KDD clean splits |
-| **WP3** | **Classical ML Detector Engines** | Upcoming 📅 | Baselines & hyper-tuned classifiers (< 15ms) |
+| **WP0** | **Project Setup & Architecture Scaffolding** | **Complete** ✅ | Clean repository, quality runner, linting, gitignore |
+| **WP1** | **Threat Modeling & ExecuTorch Feasibility** | **Complete** ✅ | Threat explainers, 4-bit quantization specs, memory budget |
+| **WP2** | **Dataset Pipeline & Hardened Splits** | **Complete** ✅ | Automated loaders, 18 URL features, zero leakage tests |
+| **WP3** | **Classical ML Detector Engines** | Next Up ⏳ | Baseline vs tuned models (< 15ms latency, < 25MB RAM) |
 | **WP4** | **Unified Router & Llama 3.2 Explainer** | Upcoming 📅 | ExecuTorch runtime, prompt injection defense |
 | **WP5** | **Edge-Case Benchmarks & Metrics** | Upcoming 📅 | Hardware profiling (RAM, battery, inference) |
 | **WP6** | **Technical Report & Academic Paper** | Upcoming 📅 | Comprehensive methodology & evaluation |
@@ -228,7 +254,7 @@ pytest && ruff check . && black --check .
 
 - **Zero Cloud Egress:** SentinelEdge contains no external API calls, tracking beacons, or cloud backends. All computation runs on local silicon.
 - **Defensive LLM Guardrails:** Prompts sent to Llama 3.2 are strict, boundary-delimited, and validated to prevent indirect prompt injection from malicious SMS or URL payloads.
-- **Open & Reproducible:** Clean dataset splits, deterministic random seeds, and open reproducible benchmarks.
+- **Open & Reproducible:** Clean dataset splits, deterministic random seeds (`seed=42`), and open reproducible benchmarks.
 
 ---
 

@@ -80,3 +80,4 @@ All datasets were split with a fixed seed (`seed = 42`) into **80% Training**, *
 4. **Data Leakage Prevention:**
    * *Problem:* Calculating feature scaling (mean/variance) or TF-IDF vocabularies across the entire dataset before splitting causes information leakage from the test set into the training set.
    * *Solution:* All feature extraction is either stateless (static lexical rules and mathematical Shannon entropy) or fits strictly on the training partition only in downstream modules (WP3).
+
