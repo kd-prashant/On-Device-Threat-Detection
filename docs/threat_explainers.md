@@ -87,3 +87,4 @@ In a mobile and edge context, inspecting full packet payloads is computationally
 | **Phishing URL** | Credential & identity theft | Static lexical tokens, Shannon entropy, domain structure | Account takeover, credential loss | Blocked benign browsing, minor user friction |
 | **Scam SMS** | Social engineering, OTP theft, bank fraud | NLP text features, urgency linguistics, token analysis | Immediate financial loss | Misclassified genuine alert or transaction notification |
 | **Network Intrusion** | Reconnaissance, port scan, DoS, brute force | Bidirectional flow statistics, packet rate, TCP flag metrics | Device compromise, unauthorized remote access | Alert fatigue, potential network throttling |
+

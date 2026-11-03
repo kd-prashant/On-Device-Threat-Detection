@@ -82,3 +82,4 @@ In compliance with **Work Package 1 (WP1)** of the PRD, this document records th
 | **Reproducibility** | Explicit download scripts, pinned seeds, versioned splits | ✅ Fully Compliant |
 | **License Compatibility** | All datasets are CC BY, open research, or public academic | ✅ Fully Compliant |
 | **Storage Protocol** | Large data files excluded from Git tracking via `.gitignore` | ✅ Fully Compliant |
+

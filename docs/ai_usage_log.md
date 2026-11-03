@@ -39,4 +39,19 @@ In accordance with PRD Section 8 (Academic Integrity and Tutor AI Policy Disclos
   * Created local non-committed team guide `TEAM_EXPLAINER_AND_VIVA_GUIDE.md` explaining Phase 0 and Phase 1 in plain English for team members and viva preparation.
 * **Human Action:** Reviewed deliverables and authorized progression to Phase 2.
 
+### Entry 004 - Work Package 2 (Data Preparation)
+* **Date:** 2026-11-03
+* **Phase:** WP2 (Data Preparation)
+* **User Prompt:** "lets move to next phase"
+* **Agent Contribution:**
+  * Developed automated data download module `src/utils/download_data.py` for UCI SMS, Curated Phishing URLs, and NSL-KDD.
+  * Authored offline static feature extraction engine for URLs (`src/utils/url_features.py`) extracting 18 structural and Shannon entropy features.
+  * Authored SMS preprocessor and metadata extractor (`src/utils/sms_preprocessor.py`) normalizing semantic tokens and psychological urgency indicators.
+  * Authored network preprocessor (`src/utils/network_preprocessor.py`) mapping NSL-KDD 41 flow features and attack taxonomies.
+  * Built unified reproducible stratified splitting module `src/utils/data_loader.py` with fixed random seed 42 (80% train, 10% val, 10% test).
+  * Authored unit tests in `tests/test_data_loaders.py` and `tests/test_feature_extraction.py` with 100% pass rate.
+  * Authored documentation `docs/data_splits_summary.md` and updated team guide `TEAM_EXPLAINER_AND_VIVA_GUIDE.md`.
+* **Human Action:** Reviewed Phase 2 deliverables and authorized progression to Phase 3.
+
+
 
