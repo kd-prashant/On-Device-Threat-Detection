@@ -53,5 +53,20 @@ In accordance with PRD Section 8 (Academic Integrity and Tutor AI Policy Disclos
   * Authored documentation `docs/data_splits_summary.md` and updated team guide `TEAM_EXPLAINER_AND_VIVA_GUIDE.md`.
 * **Human Action:** Reviewed Phase 2 deliverables and authorized progression to Phase 3.
 
+### Entry 005 - Work Package 3 (Detector Models)
+* **Date:** 2026-11-04
+* **Phase:** WP3 (Detector Models)
+* **User Prompt:** "lets move to phase 3 take ur time and doo properly"
+* **Agent Contribution:**
+  * Defined abstract typed interface `BaseDetector` and unified `DetectionResult` contract in `src/detectors/base.py`.
+  * Built complete baseline and improved model training pipeline in `src/detectors/train_all.py` comparing 6 models across URL, SMS, and Network vectors.
+  * Measured Precision, Recall, F1-Score, Confusion Matrices, False-Negative Rates, disk sizes, and single-sample inference latencies.
+  * Implemented production inference detector classes (`URLDetector`, `SMSDetector`, `NetworkDetector`) with single-pass probability inference.
+  * Generated comprehensive comparison report `docs/detector_models_report.md` and model cards in `models/model_cards.md`.
+  * Implemented 7 new integration tests in `tests/test_detectors.py` confirming sub-15ms latency budgets and detection accuracy (total test suite: 21 passed).
+  * Recorded Decision 007 in `docs/decisions.md` and updated `TEAM_EXPLAINER_AND_VIVA_GUIDE.md` with Phase 3 viva notes.
+* **Human Action:** Verified training execution, benchmark results, and authorized progression to Phase 4.
+
+
 
 

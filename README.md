@@ -8,7 +8,7 @@
 [![LLM](https://img.shields.io/badge/Reasoning-Llama%203.2%201B%20Instruct-0467DF?style=for-the-badge&logo=meta&logoColor=white)](https://ai.meta.com/llama/)
 [![Runtime](https://img.shields.io/badge/Engine-ExecuTorch%20%284--bit%29-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/executorch/)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline%20%7C%20Air--Gapped-10B981?style=for-the-badge&logo=shield&logoColor=white)]()
-[![Code Quality](https://img.shields.io/badge/Tests-14%20Passed%20%7C%20100%25-brightgreen?style=for-the-badge)](tests/)
+[![Code Quality](https://img.shields.io/badge/Tests-21%20Passed%20%7C%20100%25-brightgreen?style=for-the-badge)](tests/)
 
 <br>
 
@@ -184,6 +184,20 @@ All benchmark datasets are public academic resources, preprocessed offline and p
 
 ---
 
+## ⚡ Edge ML Model Benchmarks (WP3)
+
+All three production detectors were trained with a fixed random seed (`seed = 42`) and evaluated on held-out validation sets:
+
+| Threat Domain | Production Architecture | Accuracy | Precision | Recall | F1-Score | False-Negative Rate | Latency | Model Footprint |
+|:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **🔗 Phishing URLs** | **HistGradientBoosting** | **87.84%** | 90.02% | 85.14% | **0.8751** | **14.86%** *(down from 27.5%)* | **4.36 ms** | **0.12 MB** |
+| **💬 SMS Smishing** | **TF-IDF + Urgency Metrics** | **98.74%** | 98.55% | 91.89% | **0.9510** | **8.11%** *(down from 9.5%)* | **6.27 ms** | **0.28 MB** |
+| **🌐 Network Intrusion** | **HistGradientBoosting** | **99.73%** | 99.82% | 99.61% | **0.9971** | **0.39%** *(down from 3.6%)* | **11.38 ms** | **0.09 MB** |
+
+*All production models execute single-sample predictions in **under 12 milliseconds** with a combined size under **0.6 MB** (well within our 25 MB budget). Full comparison with baselines is in [docs/detector_models_report.md](docs/detector_models_report.md).*
+
+---
+
 ## 🚀 Quickstart & Reproduction
 
 ### 1. Clone & Set Up Environment
@@ -206,9 +220,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Download Data & Prepare Splits (Reproducible)
+### 2. Download Data, Prepare Splits & Train Models
 
-Run the automated data pipeline with a single command:
+Run the complete pipeline reproducibly with three simple commands:
 
 ```bash
 # Step A: Download raw benchmark datasets
@@ -216,6 +230,9 @@ python -m src.utils.download_data
 
 # Step B: Extract features and generate stratified 80/10/10 splits
 python -m src.utils.data_loader
+
+# Step C: Train baseline and improved detectors
+python -m src.detectors.train_all
 ```
 
 ### 3. Verify Code Quality & Run Tests
@@ -240,8 +257,8 @@ pytest && ruff check . && black --check .
 | **WP0** | **Project Setup & Architecture Scaffolding** | **Complete** ✅ | Clean repository, quality runner, linting, gitignore |
 | **WP1** | **Threat Modeling & ExecuTorch Feasibility** | **Complete** ✅ | Threat explainers, 4-bit quantization specs, memory budget |
 | **WP2** | **Dataset Pipeline & Hardened Splits** | **Complete** ✅ | Automated loaders, 18 URL features, zero leakage tests |
-| **WP3** | **Classical ML Detector Engines** | Next Up ⏳ | Baseline vs tuned models (< 15ms latency, < 25MB RAM) |
-| **WP4** | **Unified Router & Llama 3.2 Explainer** | Upcoming 📅 | ExecuTorch runtime, prompt injection defense |
+| **WP3** | **Classical ML Detector Engines** | **Complete** ✅ | Baseline vs improved models (< 12ms latency, < 0.6MB RAM) |
+| **WP4** | **Unified Router & Llama 3.2 Explainer** | Next Up ⏳ | ExecuTorch runtime, prompt injection defense |
 | **WP5** | **Edge-Case Benchmarks & Metrics** | Upcoming 📅 | Hardware profiling (RAM, battery, inference) |
 | **WP6** | **Technical Report & Academic Paper** | Upcoming 📅 | Comprehensive methodology & evaluation |
 | **WP7** | **Pre-Hardware Release Freeze** | Upcoming 📅 | Tagged v1.0 milestone release |

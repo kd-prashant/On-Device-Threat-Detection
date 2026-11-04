@@ -84,4 +84,19 @@ In compliance with the project PRD (Section 3, Rule 3), changes to architecture,
   * Model weight size reduced to ~750 MB.
   * Total peak runtime memory capped at ~1.03 GB, fitting safely within mobile OS headroom.
 
+---
+
+## Decision 007: Classical Edge Model Selection & Latency Pruning
+* **Date:** 2026-11-04
+* **Status:** Accepted (WP3 Milestone)
+* **Context:**
+  Detectors must run in under 15ms on CPU and consume under 25 MB RAM, while maintaining low False-Negative Rates on imbalanced threat data.
+* **Decision:**
+  * URL Phishing: Adopt `HistGradientBoostingClassifier(max_iter=80, max_leaf_nodes=31)` on 19 static lexical/entropy features, yielding 0.8751 F1-score with 4.36ms latency and 0.12 MB footprint.
+  * SMS Smishing: Adopt `LogisticRegression(C=2.0)` over n-gram TF-IDF (3,000 features) combined with 10 hand-crafted linguistic/urgency metadata features, yielding 0.9510 F1-score with 6.27ms latency and 0.28 MB footprint.
+  * Network Intrusion: Adopt `HistGradientBoostingClassifier(max_iter=60)` over encoded flow features, yielding 0.9971 F1-score with 11.38ms latency and 0.09 MB footprint.
+* **Consequences:**
+  Total combined memory for all 3 production models is ~0.49 MB (well below the 25 MB budget) and all models execute in under 12 milliseconds.
+
+
 

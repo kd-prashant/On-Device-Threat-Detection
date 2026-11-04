@@ -39,23 +39,13 @@ BRAND_KEYWORDS = {
     "signin",
     "verify",
     "verification",
-    "account",
     "banking",
-    "secure",
-    "update",
-    "security",
+    "secure-login",
     "wallet",
-    "confirm",
-    "support",
-    "service",
     "paypal",
-    "amazon",
-    "apple",
-    "microsoft",
     "netflix",
-    "google",
-    "chase",
     "wellsfargo",
+    "chase",
 }
 
 IPV4_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
@@ -123,8 +113,9 @@ def extract_url_features(url: str) -> dict[str, float | int]:
     num_digits = sum(c.isdigit() for c in raw_url)
     digit_ratio = num_digits / max(url_len, 1)
 
-    # Brand / impersonation keyword presence
-    has_brand = 1 if any(kw in full_str for kw in BRAND_KEYWORDS) else 0
+    # Brand / impersonation keyword presence in domain or path (excluding search query)
+    target_str = f"{hostname}/{path}".lower()
+    has_brand = 1 if any(kw in target_str for kw in BRAND_KEYWORDS) else 0
 
     features: dict[str, float | int] = {
         "url_length": url_len,
