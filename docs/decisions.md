@@ -98,5 +98,22 @@ In compliance with the project PRD (Section 3, Rule 3), changes to architecture,
 * **Consequences:**
   Total combined memory for all 3 production models is ~0.49 MB (well below the 25 MB budget) and all models execute in under 12 milliseconds.
 
+---
+
+## Decision 008: Unified Router Dispatch & Defensive Prompt Shield
+* **Date:** 2026-11-05
+* **Status:** Accepted (WP4 Milestone)
+* **Context:**
+  A single entry point (FR-6) is required to route arbitrary untrusted inputs (URLs, SMS messages, or network flow dictionaries) to Tier 1 detectors and Tier 2 explainers. Untrusted input must be protected against indirect prompt-injection and jailbreak attacks that attempt to command the LLM to output "SAFE".
+* **Decision:**
+  1. Build `UnifiedPipeline` with intelligent modal auto-detection (distinguishing URLs, conversational texts, and network flow dictionaries).
+  2. Implement `DefensivePromptBuilder` enforcing immutable boundary delimiters (`### BEGIN UNTRUSTED DATA ### ... ### END UNTRUSTED DATA ###`), proactive injection pattern matching, and token breakout sanitization.
+  3. Deploy dual-mode explainer: an ultra-fast deterministic `RuleHeuristicExplainer` mapping telemetry to MITRE ATT&CK Mobile techniques (sub-millisecond latency) and an `ExecuTorchLlamaExplainer` formatting official Llama 3.2 chat templates.
+* **Consequences:**
+  * End-to-end latency for detection + explanation is strictly under 15 milliseconds on CPU.
+  * Adversarial injection attacks are flagged with an explicit guardrail trigger and cannot override threat verdicts or defensive advice.
+  * 100% offline, zero-cloud execution preserved.
+
+
 
 
