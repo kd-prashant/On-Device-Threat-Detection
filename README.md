@@ -282,19 +282,21 @@ pytest && ruff check . && black --check .
 | **WP4** | **Unified Router & Llama 3.2 Explainer** | **Complete** ✅ | Unified router (FR-6), delimiter prompt shield, MITRE ATT&CK mapping |
 | **WP5** | **Interface & Held-Out Test Evaluation** | **Complete** ✅ | Interactive CLI (FR-7), held-out evaluator (FR-8), edge-case suite (44 tests) |
 | **WP6** | **Technical Report & Academic Paper** | **Complete** ✅ | Academic report (PRD Sec 11), reproduction guide, demo script |
-| **WP7** | **Pre-Hardware Release Freeze** | Next Up ⏳ | Tagged v1.0 milestone release, hardware audit |
-| **WP8** | **Arm / Android Deployment** | Upcoming 📅 | On-device APK / ExecuTorch deployment |
+| **WP7** | **Pre-Hardware Release Freeze** | **Complete** ✅ | Tagged `v1.0-pre-hardware` milestone, mobile readiness audit, hardware checklist |
+| **WP8** | **Arm / Android Deployment** | **In Progress** 🚀 | On-device export scripts, ExecuTorch AOT lowering, Android integration |
 | **WP9** | **Final Submission Audit** | Upcoming 📅 | Live demonstration and defense |
 
 ---
 
 ## 📑 Academic Documentation & Technical Artifacts
 
-- **[Academic Technical Report](docs/technical_report.md):** 9-part publication-ready report covering threat modeling, feature engineering, empirical benchmarks, and edge optimization.
+- **[Academic Technical Report](docs/technical_report.md):** 10-part publication-ready report covering threat modeling, feature engineering, empirical benchmarks, and edge optimization.
+- **[Mobile Readiness Audit](docs/mobile_readiness_audit.md):** Formal pre-hardware inventory of model artifacts, tensor shapes, operator compatibility, and 4GB RAM budget analysis.
+- **[Hardware Checklist & Setup Protocol](docs/hardware_checklist.md):** Physical Android device setup guide (ADB debugging, model pushing, and Airplane Mode verification).
 - **[Reproduction & Setup Guide](docs/reproduction_guide.md):** Step-by-step instructions enabling any researcher to reproduce all benchmarks from a fresh clone.
 - **[Demonstration & Defense Script](docs/demo_script.md):** 5-minute timed presentation walkthrough with CLI commands, prompt injection proofs, and viva defense answers.
 - **[Final Held-Out Test Benchmarks](docs/final_test_benchmarks.md):** Complete test evaluation matrix and confusion matrices across 6,701 test samples.
-- **[Architectural Decision Records](docs/decisions.md):** Formal log of architectural choices (Decisions 001 through 010).
+- **[Architectural Decision Records](docs/decisions.md):** Formal log of architectural choices (Decisions 001 through 011).
 
 ---
 

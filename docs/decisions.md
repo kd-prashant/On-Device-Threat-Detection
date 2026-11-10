@@ -144,6 +144,22 @@ In compliance with the project PRD (Section 3, Rule 3), changes to architecture,
   * Complete compliance with PRD Section 11 documentation criteria achieved.
   * All technical findings, architectural decisions, and honest engineering trade-offs formalized for academic evaluation.
 
+---
+
+## Decision 011: Pre-Hardware Code Freeze & Mobile Conversion Strategy
+* **Date:** 2026-11-10
+* **Status:** Accepted (WP7 Milestone)
+* **Context:**
+  Before deploying software onto physical mobile silicon in Phase 8 (WP8), PRD Work Package 7 requires creating an official release freeze tag, an artifact conversion audit, and a human team hardware preparation checklist.
+* **Decision:**
+  1. Create an annotated Git tag `v1.0-pre-hardware` locking the verified PC codebase (all 44 unit and edge-case tests passing).
+  2. Author `docs/mobile_readiness_audit.md` detailing model artifact budgets (0.49 MB total detector size, ~750 MB Int4 Llama weights, ~1.03 GB peak resident RAM headroom on 4GB/6GB phones).
+  3. Author `docs/hardware_checklist.md` establishing the step-by-step checklist for ADB authorization, ARM64 verification, artifact transfer via `adb push`, and offline Airplane Mode compliance testing.
+* **Consequences:**
+  * Official milestone release `v1.0-pre-hardware` created and pushed to GitHub.
+  * Hardware readiness confirmed with clear risk mitigations for Low Memory Killer (LMK), thermal throttling, and operator compatibility.
+
+
 
 
 

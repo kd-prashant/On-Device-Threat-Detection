@@ -278,3 +278,4 @@ With the completion of **Work Packages 0 through 5**, SentinelEdge has achieved:
 * **Defensive Prompt Shield:** Delimiter-isolated explainer mapping threats to MITRE ATT&CK Mobile.
 * **Robustness Verification:** **44 automated unit, integration, and edge-case tests passing** with 100% success rate.
 * **Complete Reproducibility:** 1-click execution runners (`check.ps1` and `check.bat`) enabling any evaluator to rebuild results from scratch.
+

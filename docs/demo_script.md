@@ -96,3 +96,4 @@ python -m benchmarks.evaluate_all
 
 ### Q3: "How do you prove you didn't overfit to your training data?"
 * **Answer:** *"Our held-out test split (10% partition, 6,701 samples) was locked at project inception (`seed=42`) and never observed during model training or tuning. When evaluated in Phase 5, our test F1-scores closely matched our validation scores (URL test 0.865 vs val 0.875; SMS test 0.944 vs val 0.951), proving zero data leakage and strong real-world generalization."*
+

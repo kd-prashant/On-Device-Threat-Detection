@@ -146,3 +146,4 @@ To verify that SentinelEdge operates with 100% offline autonomy:
 | **`ModuleNotFoundError: No module named 'src'`** | Python path does not include project root. | Run Python modules using `python -m src.ui.cli` from the project root directory, or ensure `PYTHONPATH=.`. |
 | **Loky CPU core warning in pytest** | Windows permissions preventing Loky from reading physical core counts via WMI. | Benign warning; does not affect inference. Can be silenced with `$env:LOKY_MAX_CPU_COUNT="4"`. |
 | **Model files not found in `models/`** | Repository was freshly cloned and models have not been trained yet. | Run `python -m src.detectors.train_all` to generate all `.pkl` binaries locally in under 30 seconds. |
+
