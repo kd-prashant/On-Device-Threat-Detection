@@ -61,3 +61,4 @@ To provide academic distinction, SentinelEdge automatically correlates detected 
 | **Phishing URLs** | `T1566.002` | Spearphishing Link | Initial Access | [attack.mitre.org/techniques/T1566/002](https://attack.mitre.org/techniques/T1566/002/) |
 | **SMS Smishing** | `T1476` | Phishing: SMS / Smishing | Initial Access | [attack.mitre.org/techniques/T1476](https://attack.mitre.org/techniques/T1476/) |
 | **Network Anomalies** | `T1407` | Network Traffic Interception / Scan | Discovery | [attack.mitre.org/techniques/T1407](https://attack.mitre.org/techniques/T1407/) |
+

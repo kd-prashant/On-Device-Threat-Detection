@@ -1,1 +1,1 @@
-"""User interface modules (CLI and future interactive UI)."""
+"""User interface package for SentinelEdge."""

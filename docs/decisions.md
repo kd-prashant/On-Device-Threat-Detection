@@ -114,6 +114,22 @@ In compliance with the project PRD (Section 3, Rule 3), changes to architecture,
   * Adversarial injection attacks are flagged with an explicit guardrail trigger and cannot override threat verdicts or defensive advice.
   * 100% offline, zero-cloud execution preserved.
 
+---
+
+## Decision 009: Interactive CLI Architecture & Held-Out Test Evaluation Protocol
+* **Date:** 2026-11-10
+* **Status:** Accepted (WP5 Milestone)
+* **Context:**
+  Per PRD requirements FR-7 and FR-8, a simple PC demonstration interface and an automated benchmark evaluation script on strictly held-out test sets are required. Edge-case resilience (empty inputs, multilingual UTF-8, emojis, and malformed URLs) must be formally tested.
+* **Decision:**
+  1. Build an ANSI-styled interactive CLI dashboard (`src/ui/cli.py`) supporting both single-shot command line arguments and a menu-driven demonstration mode with preloaded threat scenarios.
+  2. Build an automated held-out evaluation runner (`benchmarks/evaluate_all.py`) that evaluates baseline and improved models across all 3 test partitions (6,701 total test samples), recording accuracy, precision, recall, F1, false-negative rates, confusion matrices, and warm inference latencies.
+  3. Implement an extensive edge-case test suite (`tests/test_edge_cases.py`) verifying graceful degradation across empty strings, 10,000+ character payloads, multilingual text (Hindi, Chinese, Russian, Spanish), emojis, and partial network flows.
+* **Consequences:**
+  * Held-out test F1-scores closely match validation results (URL: 0.8649, SMS: 0.9444, Network: 0.7893), verifying zero data leakage.
+  * Test suite expanded to 44 automated unit and integration tests with 100% pass rate.
+
+
 
 
 

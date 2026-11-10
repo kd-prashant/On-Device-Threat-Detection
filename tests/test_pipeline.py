@@ -133,3 +133,16 @@ def test_invalid_input_type_raises_error() -> None:
     pipeline = UnifiedPipeline()
     with pytest.raises(ValueError, match="Invalid input_type"):
         pipeline.analyze("test", input_type="bluetooth")
+
+
+def test_cli_display_result(capsys: pytest.CaptureFixture[str]) -> None:
+    """Verify that CLI output renderer produces formatted cards."""
+    from src.ui.cli import display_result, format_header
+
+    hdr = format_header()
+    assert "SentinelEdge" in hdr
+
+    res = analyze("https://www.google.com")
+    display_result(res)
+    captured = capsys.readouterr()
+    assert "CLEAN / SAFE" in captured.out

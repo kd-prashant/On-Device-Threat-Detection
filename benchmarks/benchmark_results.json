@@ -1,0 +1,138 @@
+{
+  "timestamp": "2026-11-10 15:28:39",
+  "total_models_evaluated": 6,
+  "results": [
+    {
+      "domain": "url",
+      "model_name": "URL Baseline (LogisticRegression)",
+      "test_samples": 1143,
+      "threat_samples": 571,
+      "safe_samples": 572,
+      "accuracy": 0.7865266841644795,
+      "precision": 0.8486140724946695,
+      "recall": 0.6970227670753065,
+      "f1_score": 0.7653846153846153,
+      "false_negative_rate": 0.30297723292469353,
+      "false_positive_rate": 0.12412587412587413,
+      "confusion_matrix": {
+        "tn": 501,
+        "fp": 71,
+        "fn": 173,
+        "tp": 398
+      },
+      "latency_ms": 1.143,
+      "size_kb": 1.77,
+      "size_mb": 0.002
+    },
+    {
+      "domain": "url",
+      "model_name": "URL Improved (HistGradientBoosting)",
+      "test_samples": 1143,
+      "threat_samples": 571,
+      "safe_samples": 572,
+      "accuracy": 0.868766404199475,
+      "precision": 0.8905380333951762,
+      "recall": 0.840630472854641,
+      "f1_score": 0.8648648648648649,
+      "false_negative_rate": 0.159369527145359,
+      "false_positive_rate": 0.10314685314685315,
+      "confusion_matrix": {
+        "tn": 513,
+        "fp": 59,
+        "fn": 91,
+        "tp": 480
+      },
+      "latency_ms": 5.163,
+      "size_kb": 122.42,
+      "size_mb": 0.12
+    },
+    {
+      "domain": "sms",
+      "model_name": "SMS Baseline (MultinomialNB)",
+      "test_samples": 558,
+      "threat_samples": 75,
+      "safe_samples": 483,
+      "accuracy": 0.989247311827957,
+      "precision": 0.9859154929577465,
+      "recall": 0.9333333333333333,
+      "f1_score": 0.958904109589041,
+      "false_negative_rate": 0.06666666666666667,
+      "false_positive_rate": 0.002070393374741201,
+      "confusion_matrix": {
+        "tn": 482,
+        "fp": 1,
+        "fn": 5,
+        "tp": 70
+      },
+      "latency_ms": 0.977,
+      "size_kb": 311.71,
+      "size_mb": 0.304
+    },
+    {
+      "domain": "sms",
+      "model_name": "SMS Improved (TF-IDF + Metadata)",
+      "test_samples": 558,
+      "threat_samples": 75,
+      "safe_samples": 483,
+      "accuracy": 0.985663082437276,
+      "precision": 0.9855072463768116,
+      "recall": 0.9066666666666666,
+      "f1_score": 0.9444444444444444,
+      "false_negative_rate": 0.09333333333333334,
+      "false_positive_rate": 0.002070393374741201,
+      "confusion_matrix": {
+        "tn": 482,
+        "fp": 1,
+        "fn": 7,
+        "tp": 68
+      },
+      "latency_ms": 4.887,
+      "size_kb": 284.68,
+      "size_mb": 0.278
+    },
+    {
+      "domain": "network",
+      "model_name": "Network Baseline (LogisticRegression)",
+      "test_samples": 5000,
+      "threat_samples": 2846,
+      "safe_samples": 2154,
+      "accuracy": 0.7448,
+      "precision": 0.9157838983050848,
+      "recall": 0.6075193253689388,
+      "f1_score": 0.730460498521335,
+      "false_negative_rate": 0.3924806746310611,
+      "false_positive_rate": 0.07381615598885793,
+      "confusion_matrix": {
+        "tn": 1995,
+        "fp": 159,
+        "fn": 1117,
+        "tp": 1729
+      },
+      "latency_ms": 8.925,
+      "size_kb": 4.68,
+      "size_mb": 0.005
+    },
+    {
+      "domain": "network",
+      "model_name": "Network Improved (HistGradientBoosting)",
+      "test_samples": 5000,
+      "threat_samples": 2846,
+      "safe_samples": 2154,
+      "accuracy": 0.7972,
+      "precision": 0.9659206510681587,
+      "recall": 0.6672522839072382,
+      "f1_score": 0.7892768079800498,
+      "false_negative_rate": 0.33274771609276177,
+      "false_positive_rate": 0.031104921077065924,
+      "confusion_matrix": {
+        "tn": 2087,
+        "fp": 67,
+        "fn": 947,
+        "tp": 1899
+      },
+      "latency_ms": 9.338,
+      "size_kb": 93.61,
+      "size_mb": 0.091
+    }
+  ]
+}

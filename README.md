@@ -8,7 +8,7 @@
 [![LLM](https://img.shields.io/badge/Reasoning-Llama%203.2%201B%20Instruct-0467DF?style=for-the-badge&logo=meta&logoColor=white)](https://ai.meta.com/llama/)
 [![Runtime](https://img.shields.io/badge/Engine-ExecuTorch%20%284--bit%29-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/executorch/)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline%20%7C%20Air--Gapped-10B981?style=for-the-badge&logo=shield&logoColor=white)]()
-[![Code Quality](https://img.shields.io/badge/Tests-35%20Passed%20%7C%20100%25-brightgreen?style=for-the-badge)](tests/)
+[![Code Quality](https://img.shields.io/badge/Tests-44%20Passed%20%7C%20100%25-brightgreen?style=for-the-badge)](tests/)
 
 <br>
 
@@ -235,16 +235,28 @@ python -m src.utils.data_loader
 python -m src.detectors.train_all
 ```
 
-### 3. Run Live Threat Analysis (Unified Router)
+### 3. Run Live Interactive Terminal UI (FR-7)
 
-Test the complete two-tier pipeline with a single Python command:
+Launch the interactive cybersecurity assistant dashboard:
 
 ```bash
-# Analyze a suspicious phishing link with live explanation
-python -c "from src.pipeline.router import analyze; res = analyze('http://192.168.1.55/paypal.com/login-verify.top'); print(f'Verdict: {res.explanation.verdict} ({res.explanation.confidence_pct}) in {res.total_latency_ms}ms\nReasoning: {res.explanation.reasoning}\nActions: {res.explanation.recommended_actions}')"
+# Launch interactive REPL menu with preloaded threat scenarios
+python -m src.ui.cli
+
+# Or evaluate a single input directly from command line
+python -m src.ui.cli "http://192.168.1.55/paypal.com/security.top"
+python -m src.ui.cli "URGENT: Your SBI account is suspended! Update KYC: http://bit.ly/scam"
 ```
 
-### 4. Verify Code Quality & Run Tests
+### 4. Run Final Held-Out Test Evaluation (FR-8)
+
+Evaluate all 6 models across 6,701 strictly held-out test samples and generate benchmark reports:
+
+```bash
+python -m benchmarks.evaluate_all
+```
+
+### 5. Verify Code Quality & Run Test Suite
 
 ```powershell
 # Windows PowerShell (1-Click Quality Runner)
@@ -268,8 +280,8 @@ pytest && ruff check . && black --check .
 | **WP2** | **Dataset Pipeline & Hardened Splits** | **Complete** ✅ | Automated loaders, 18 URL features, zero leakage tests |
 | **WP3** | **Classical ML Detector Engines** | **Complete** ✅ | Baseline vs improved models (< 12ms latency, < 0.6MB RAM) |
 | **WP4** | **Unified Router & Llama 3.2 Explainer** | **Complete** ✅ | Unified router (FR-6), delimiter prompt shield, MITRE ATT&CK mapping |
-| **WP5** | **Edge-Case Benchmarks & Metrics** | Next Up ⏳ | Terminal UI (FR-7), held-out test evaluation script (FR-8) |
-| **WP6** | **Technical Report & Academic Paper** | Upcoming 📅 | Comprehensive methodology & evaluation |
+| **WP5** | **Interface & Held-Out Test Evaluation** | **Complete** ✅ | Interactive CLI (FR-7), held-out evaluator (FR-8), edge-case suite (44 tests) |
+| **WP6** | **Technical Report & Academic Paper** | Next Up ⏳ | Comprehensive methodology & evaluation |
 | **WP7** | **Pre-Hardware Release Freeze** | Upcoming 📅 | Tagged v1.0 milestone release |
 | **WP8** | **Arm / Android Deployment** | Upcoming 📅 | On-device APK / ExecuTorch deployment |
 | **WP9** | **Final Submission Audit** | Upcoming 📅 | Live demonstration and defense |

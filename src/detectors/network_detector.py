@@ -36,7 +36,7 @@ DEFAULT_FLOW_VALUES: dict[str, Any] = {
     "urgent": 0,
     "hot": 0,
     "num_failed_logins": 0,
-    "logged_in": 1,
+    "logged_in": 0,
     "num_compromised": 0,
     "root_shell": 0,
     "su_attempted": 0,
