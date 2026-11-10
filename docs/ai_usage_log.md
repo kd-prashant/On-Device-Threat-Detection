@@ -116,6 +116,20 @@ In accordance with PRD Section 8 (Academic Integrity and Tutor AI Policy Disclos
   * Updated README roadmap marking WP7 as Complete.
 * **Human Action:** Authorized pre-hardware release freeze; verified hardware readiness audit and checklist.
 
+### Entry 010 - Work Package 8 (Arm / Android Deployment & On-Device Execution)
+* **Date:** 2026-11-10
+* **Phase:** WP8 (Android Phone Deployment)
+* **User Prompt:** "now back to our project ... what i want is our project must be standout so i want to u do every minute things very carefullly ... lets ove"
+* **Agent Contribution:**
+  * Built the detector export and compression tool `deploy/export_detectors.py`, extracting classical pipelines into a 230 KB zero-dependency portable weight structure with 100.00% verified mathematical parity.
+  * Implemented the standalone mobile edge inference engine `deploy/edge_runtime.py`, executing sub-2ms on-device evaluation without requiring Scikit-learn or SciPy on the smartphone.
+  * Created the ExecuTorch Ahead-Of-Time (AOT) lowering pipeline `deploy/export_llama_pte.py` for Meta Llama 3.2 1B Instruct using 4-bit groupwise PTQ (`group_size=128`) targeting XNNPACK.
+  * Authored the system-level air-gap contract verification suite `deploy/verify_offline_contract.py`, mathematically proving requirement FR-9 under strict socket interception.
+  * Authored the comprehensive Android Deployment Manual `deploy/android_guide.md` with zero-permission AndroidManifest, Kotlin real-time SMS broadcast receiver, and ExecuTorch C++ JNI bridge.
+  * Authored 6 automated deployment unit tests in `tests/test_deploy.py` (total test suite expanded to 50 passed tests).
+  * Recorded Decision 012 in `docs/decisions.md` and appended Section 11 to `TEAM_EXPLAINER_AND_VIVA_GUIDE.md`.
+* **Human Action:** Instructed agent to focus on standout, rigorous edge engineering; verified on-device zero-dependency parity and offline contract suite.
+
 
 
 

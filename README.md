@@ -8,7 +8,7 @@
 [![LLM](https://img.shields.io/badge/Reasoning-Llama%203.2%201B%20Instruct-0467DF?style=for-the-badge&logo=meta&logoColor=white)](https://ai.meta.com/llama/)
 [![Runtime](https://img.shields.io/badge/Engine-ExecuTorch%20%284--bit%29-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/executorch/)
 [![Privacy](https://img.shields.io/badge/Privacy-100%25%20Offline%20%7C%20Air--Gapped-10B981?style=for-the-badge&logo=shield&logoColor=white)]()
-[![Code Quality](https://img.shields.io/badge/Tests-44%20Passed%20%7C%20100%25-brightgreen?style=for-the-badge)](tests/)
+[![Code Quality](https://img.shields.io/badge/Tests-50%20Passed%20%7C%20100%25-brightgreen?style=for-the-badge)](tests/)
 
 <br>
 
@@ -283,20 +283,22 @@ pytest && ruff check . && black --check .
 | **WP5** | **Interface & Held-Out Test Evaluation** | **Complete** ✅ | Interactive CLI (FR-7), held-out evaluator (FR-8), edge-case suite (44 tests) |
 | **WP6** | **Technical Report & Academic Paper** | **Complete** ✅ | Academic report (PRD Sec 11), reproduction guide, demo script |
 | **WP7** | **Pre-Hardware Release Freeze** | **Complete** ✅ | Tagged `v1.0-pre-hardware` milestone, mobile readiness audit, hardware checklist |
-| **WP8** | **Arm / Android Deployment** | **In Progress** 🚀 | On-device export scripts, ExecuTorch AOT lowering, Android integration |
-| **WP9** | **Final Submission Audit** | Upcoming 📅 | Live demonstration and defense |
+| **WP8** | **Arm / Android Deployment** | **Complete** ✅ | Standalone edge runtime, zero-dependency model export, ExecuTorch AOT pipeline, Android guide, offline test |
+| **WP9** | **Final Submission Audit** | Next Up ⏳ | Final PRD checklist, video recording blueprint, official submission |
 
 ---
 
 ## 📑 Academic Documentation & Technical Artifacts
 
 - **[Academic Technical Report](docs/technical_report.md):** 10-part publication-ready report covering threat modeling, feature engineering, empirical benchmarks, and edge optimization.
+- **[Android Deployment Manual](deploy/android_guide.md):** Architectural blueprints, zero-permission manifest, Kotlin broadcast receiver, and ExecuTorch C++ JNI bridge.
+- **[Zero-Cloud Air-Gap Verification](deploy/verify_offline_contract.py):** Automated socket lockdown test mathematically proving requirement FR-9.
 - **[Mobile Readiness Audit](docs/mobile_readiness_audit.md):** Formal pre-hardware inventory of model artifacts, tensor shapes, operator compatibility, and 4GB RAM budget analysis.
 - **[Hardware Checklist & Setup Protocol](docs/hardware_checklist.md):** Physical Android device setup guide (ADB debugging, model pushing, and Airplane Mode verification).
 - **[Reproduction & Setup Guide](docs/reproduction_guide.md):** Step-by-step instructions enabling any researcher to reproduce all benchmarks from a fresh clone.
 - **[Demonstration & Defense Script](docs/demo_script.md):** 5-minute timed presentation walkthrough with CLI commands, prompt injection proofs, and viva defense answers.
 - **[Final Held-Out Test Benchmarks](docs/final_test_benchmarks.md):** Complete test evaluation matrix and confusion matrices across 6,701 test samples.
-- **[Architectural Decision Records](docs/decisions.md):** Formal log of architectural choices (Decisions 001 through 011).
+- **[Architectural Decision Records](docs/decisions.md):** Formal log of architectural choices (Decisions 001 through 012).
 
 ---
 

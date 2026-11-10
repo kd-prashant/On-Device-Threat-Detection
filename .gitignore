@@ -66,6 +66,8 @@ data/processed/*
 *.tflite
 models/*
 !models/.gitkeep
+deploy/exported_models/*
+!deploy/exported_models/.gitkeep
 
 # IDE and OS files
 .vscode/
