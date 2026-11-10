@@ -284,13 +284,15 @@ pytest && ruff check . && black --check .
 | **WP6** | **Technical Report & Academic Paper** | **Complete** ✅ | Academic report (PRD Sec 11), reproduction guide, demo script |
 | **WP7** | **Pre-Hardware Release Freeze** | **Complete** ✅ | Tagged `v1.0-pre-hardware` milestone, mobile readiness audit, hardware checklist |
 | **WP8** | **Arm / Android Deployment** | **Complete** ✅ | Standalone edge runtime, zero-dependency model export, ExecuTorch AOT pipeline, Android guide, offline test |
-| **WP9** | **Final Submission Audit** | Next Up ⏳ | Final PRD checklist, video recording blueprint, official submission |
+| **WP9** | **Final Submission Audit** | **Complete** ✅ | 23-point PRD Section 13 audit (100% PASS), official submission dossier, 5-minute video storyboard |
 
 ---
 
 ## 📑 Academic Documentation & Technical Artifacts
 
 - **[Academic Technical Report](docs/technical_report.md):** 10-part publication-ready report covering threat modeling, feature engineering, empirical benchmarks, and edge optimization.
+- **[Official Submission Dossier & PRD Audit](docs/final_submission_checklist.md):** 23-point compliance audit scorecard, 250-word executive abstract, and copy-paste portal entries.
+- **[Demonstration Video Recording Guide](docs/video_recording_guide.md):** Minute-by-minute 5-minute video presentation storyboard, spoken narration scripts, and technical tips.
 - **[Android Deployment Manual](deploy/android_guide.md):** Architectural blueprints, zero-permission manifest, Kotlin broadcast receiver, and ExecuTorch C++ JNI bridge.
 - **[Zero-Cloud Air-Gap Verification](deploy/verify_offline_contract.py):** Automated socket lockdown test mathematically proving requirement FR-9.
 - **[Mobile Readiness Audit](docs/mobile_readiness_audit.md):** Formal pre-hardware inventory of model artifacts, tensor shapes, operator compatibility, and 4GB RAM budget analysis.
@@ -298,7 +300,7 @@ pytest && ruff check . && black --check .
 - **[Reproduction & Setup Guide](docs/reproduction_guide.md):** Step-by-step instructions enabling any researcher to reproduce all benchmarks from a fresh clone.
 - **[Demonstration & Defense Script](docs/demo_script.md):** 5-minute timed presentation walkthrough with CLI commands, prompt injection proofs, and viva defense answers.
 - **[Final Held-Out Test Benchmarks](docs/final_test_benchmarks.md):** Complete test evaluation matrix and confusion matrices across 6,701 test samples.
-- **[Architectural Decision Records](docs/decisions.md):** Formal log of architectural choices (Decisions 001 through 012).
+- **[Architectural Decision Records](docs/decisions.md):** Formal log of architectural choices (Decisions 001 through 013).
 
 ---
 
