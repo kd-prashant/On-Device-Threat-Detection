@@ -129,6 +129,22 @@ In compliance with the project PRD (Section 3, Rule 3), changes to architecture,
   * Held-out test F1-scores closely match validation results (URL: 0.8649, SMS: 0.9444, Network: 0.7893), verifying zero data leakage.
   * Test suite expanded to 44 automated unit and integration tests with 100% pass rate.
 
+---
+
+## Decision 010: Comprehensive Academic Technical Report & Documentation Framework
+* **Date:** 2026-11-10
+* **Status:** Accepted (WP6 Milestone)
+* **Context:**
+  PRD Section 6 and Section 11 require a formal academic technical report covering 9 specific topic areas, alongside complete setup reproduction guides, demonstration walk-through scripts, and honest documentation of lessons learned.
+* **Decision:**
+  1. Author the definitive Academic Technical Report (`docs/technical_report.md`) adhering rigorously to the 9-part outline from PRD Section 11, embedding only factual, measured benchmark data from code execution.
+  2. Create a standalone Reproduction Guide (`docs/reproduction_guide.md`) providing step-by-step instructions from `git clone` to full benchmark evaluation so any non-author teammate can replicate the project.
+  3. Create an examination-ready Demonstration Script (`docs/demo_script.md`) organizing live CLI demonstrations, prompt-injection defense proofs, and viva speaking scripts into a 5-minute presentation blueprint.
+* **Consequences:**
+  * Complete compliance with PRD Section 11 documentation criteria achieved.
+  * All technical findings, architectural decisions, and honest engineering trade-offs formalized for academic evaluation.
+
+
 
 
 

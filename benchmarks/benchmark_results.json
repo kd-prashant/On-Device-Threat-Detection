@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-10 15:28:39",
+  "timestamp": "2026-11-10 15:48:22",
   "total_models_evaluated": 6,
   "results": [
     {
@@ -20,7 +20,7 @@
         "fn": 173,
         "tp": 398
       },
-      "latency_ms": 1.143,
+      "latency_ms": 0.851,
       "size_kb": 1.77,
       "size_mb": 0.002
     },
@@ -42,7 +42,7 @@
         "fn": 91,
         "tp": 480
       },
-      "latency_ms": 5.163,
+      "latency_ms": 2.003,
       "size_kb": 122.42,
       "size_mb": 0.12
     },
@@ -64,7 +64,7 @@
         "fn": 5,
         "tp": 70
       },
-      "latency_ms": 0.977,
+      "latency_ms": 0.453,
       "size_kb": 311.71,
       "size_mb": 0.304
     },
@@ -86,7 +86,7 @@
         "fn": 7,
         "tp": 68
       },
-      "latency_ms": 4.887,
+      "latency_ms": 2.383,
       "size_kb": 284.68,
       "size_mb": 0.278
     },
@@ -108,7 +108,7 @@
         "fn": 1117,
         "tp": 1729
       },
-      "latency_ms": 8.925,
+      "latency_ms": 2.369,
       "size_kb": 4.68,
       "size_mb": 0.005
     },
@@ -130,7 +130,7 @@
         "fn": 947,
         "tp": 1899
       },
-      "latency_ms": 9.338,
+      "latency_ms": 4.316,
       "size_kb": 93.61,
       "size_mb": 0.091
     }

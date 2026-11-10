@@ -92,6 +92,19 @@ In accordance with PRD Section 8 (Academic Integrity and Tutor AI Policy Disclos
   * Recorded Decision 009 in `docs/decisions.md` and appended Section 8 to `TEAM_EXPLAINER_AND_VIVA_GUIDE.md`.
 * **Human Action:** Authorized progression to Phase 5; tested CLI and reviewed held-out test benchmarks.
 
+### Entry 008 - Work Package 6 (Academic Documentation & Technical Report)
+* **Date:** 2026-11-10
+* **Phase:** WP6 (Documentation and Report)
+* **User Prompt:** "lets move to next phase and complete it don't rush....take ur time"
+* **Agent Contribution:**
+  * Authored the comprehensive academic technical report `docs/technical_report.md` adhering to the 9-part outline from PRD Section 11.
+  * Created the standalone reproduction guide `docs/reproduction_guide.md` providing step-by-step instructions from `git clone` to full benchmark reproduction.
+  * Created the 5-minute timed demonstration script `docs/demo_script.md` for student team presentations and viva defense.
+  * Recorded Decision 010 in `docs/decisions.md` and appended Section 9 to `TEAM_EXPLAINER_AND_VIVA_GUIDE.md`.
+  * Updated README with links to all WP6 deliverables and marked WP6 as Complete.
+* **Human Action:** Directed high-quality completion of academic report and documentation; verified deliverables.
+
+
 
 
 
