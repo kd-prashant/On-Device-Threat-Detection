@@ -43,7 +43,7 @@ def test_url_pipeline_end_to_end() -> None:
     assert res.explanation.verdict == "PHISHING"
     assert len(res.explanation.recommended_actions) == 3
     assert res.explanation.mitre_attack is not None
-    assert res.explanation.mitre_attack.technique_id == "T1566.002"
+    assert res.explanation.mitre_attack.technique_id == "T1660"
     assert res.total_latency_ms > 0.0
 
 
@@ -60,7 +60,7 @@ def test_sms_pipeline_end_to_end() -> None:
     assert len(res.explanation.recommended_actions) == 3
     assert "Do NOT click" in res.explanation.recommended_actions[0]
     assert res.explanation.mitre_attack is not None
-    assert res.explanation.mitre_attack.technique_id == "T1476"
+    assert res.explanation.mitre_attack.technique_id == "T1660"
 
 
 def test_network_pipeline_end_to_end() -> None:

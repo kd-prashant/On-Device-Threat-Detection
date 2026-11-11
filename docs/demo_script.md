@@ -39,7 +39,7 @@ python -m src.ui.cli
 > **Highlight on Screen:**
 * Point to the **Red Threat Card:** `[🚨 THREAT DETECTED: SCAM (99.8%)]`.
 * Point to the **Latency Counter:** `Total Latency: 5.12 ms`.
-* Point to the **MITRE ATT&CK Badge:** `T1476 - Phishing: SMS / Smishing (Initial Access)`.
+* Point to the **MITRE ATT&CK Badge:** `T1660 - Phishing (Initial Access)`.
 * Point to the **3 Concrete Steps:** *"Notice, Professor, that our system does not just say 'scam'—it gives the user three practical, strictly defensive actions: do not click, block sender, and report to carrier."*
 
 ---

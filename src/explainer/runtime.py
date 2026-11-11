@@ -21,24 +21,24 @@ from src.explainer.prompt_builder import (
     SanitizedPromptPayload,
 )
 
-# MITRE ATT&CK for Mobile taxonomies
+# MITRE ATT&CK for Mobile taxonomies (v14+)
 MITRE_MAPPINGS: dict[str, MitreTechnique] = {
     "url": MitreTechnique(
-        technique_id="T1566.002",
-        technique_name="Phishing: Spearphishing Link",
+        technique_id="T1660",
+        technique_name="Phishing",
         tactic="Initial Access",
-        reference_url="https://attack.mitre.org/techniques/T1566/002/",
+        reference_url="https://attack.mitre.org/techniques/T1660/",
     ),
     "sms": MitreTechnique(
-        technique_id="T1476",
-        technique_name="Phishing: SMS / Smishing",
+        technique_id="T1660",
+        technique_name="Phishing",
         tactic="Initial Access",
-        reference_url="https://attack.mitre.org/techniques/T1476/",
+        reference_url="https://attack.mitre.org/techniques/T1660/",
     ),
     "network": MitreTechnique(
         technique_id="T1407",
-        technique_name="Network Traffic Interception / Scan",
-        tactic="Credential Access / Discovery",
+        technique_name="Network Traffic Capture",
+        tactic="Credential Access",
         reference_url="https://attack.mitre.org/techniques/T1407/",
     ),
 }

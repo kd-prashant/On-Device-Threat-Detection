@@ -128,5 +128,5 @@ To prove 100% offline compliance in front of your tutor:
 - [ ] **Step 4:** Observe real-time output:
   * Detection verdict appears in **< 15 milliseconds**.
   * Llama 3.2 natural language rationale and 3 concrete defensive steps appear on the device screen.
-  * MITRE ATT&CK Mobile badge (`T1476` / `T1566.002`) renders.
+  * MITRE ATT&CK Mobile badge (`T1660`) renders.
 - [ ] **Step 5 (Video Evidence):** Record a continuous video showing the phone in Airplane Mode executing the demo without cuts.

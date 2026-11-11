@@ -54,11 +54,11 @@ Every threat explanation is audited against four non-negotiable criteria: **Clea
 
 ## 4. Industry Taxonomy Mapping (MITRE ATT&CK for Mobile)
 
-To provide academic distinction, SentinelEdge automatically correlates detected threats with MITRE ATT&CK Mobile matrix techniques:
+To provide academic distinction, SentinelEdge automatically correlates detected threats with the official MITRE ATT&CK Mobile matrix (v14+):
 
 | Threat Modality | MITRE ID | Technique Name | Mobile Tactic | Reference |
 |:---|:---:|:---|:---|:---|
-| **Phishing URLs** | `T1566.002` | Spearphishing Link | Initial Access | [attack.mitre.org/techniques/T1566/002](https://attack.mitre.org/techniques/T1566/002/) |
-| **SMS Smishing** | `T1476` | Phishing: SMS / Smishing | Initial Access | [attack.mitre.org/techniques/T1476](https://attack.mitre.org/techniques/T1476/) |
-| **Network Anomalies** | `T1407` | Network Traffic Interception / Scan | Discovery | [attack.mitre.org/techniques/T1407](https://attack.mitre.org/techniques/T1407/) |
+| **Phishing URLs** | `T1660` | Phishing | Initial Access | [attack.mitre.org/techniques/T1660](https://attack.mitre.org/techniques/T1660/) |
+| **SMS Smishing** | `T1660` | Phishing | Initial Access | [attack.mitre.org/techniques/T1660](https://attack.mitre.org/techniques/T1660/) |
+| **Network Anomalies** | `T1407` | Network Traffic Capture | Credential Access | [attack.mitre.org/techniques/T1407](https://attack.mitre.org/techniques/T1407/) |
 

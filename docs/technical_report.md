@@ -86,7 +86,7 @@ SentinelEdge adopts a decoupled two-tier architecture separating high-throughput
                           │      Tier 2: Threat Explainer Engine         │
                           │  • ExecuTorch Llama 3.2 1B (4-bit Mobile)    │
                           │  • RuleHeuristicExplainer (PC Stand-in)      │
-                          │  • MITRE ATT&CK Mobile Mapping (T1476/T1566) │
+                          │  • MITRE ATT&CK Mobile Mapping (T1660/T1407) │
                           └──────────────────────┬───────────────────────┘
                                                  │
                                                  ▼
@@ -190,10 +190,10 @@ To prevent this, SentinelEdge enforces four levels of defensive isolation:
 4. **Independent Classical Verdict Anchor:** The classification verdict is determined by Tier 1 ML models, which evaluate mathematical tokens and are mathematically immune to prompt injection. The LLM cannot alter a `SCAM` verdict.
 
 ### 5.3 MITRE ATT&CK for Mobile Alignment
-Every flagged threat is correlated with the industry-standard MITRE ATT&CK Mobile matrix:
-* **Phishing URLs:** Technique `T1566.002` (Phishing: Spearphishing Link / Initial Access).
-* **SMS Smishing:** Technique `T1476` (Phishing: SMS / Smishing / Initial Access).
-* **Network Anomalies:** Technique `T1407` (Network Traffic Interception / Scan / Discovery).
+Every flagged threat is correlated with the official MITRE ATT&CK Mobile matrix (v14+):
+* **Phishing URLs:** Technique `T1660` (Phishing / Initial Access).
+* **SMS Smishing:** Technique `T1660` (Phishing via Messaging / Initial Access).
+* **Network Anomalies:** Technique `T1407` (Network Traffic Capture / Credential Access).
 
 ### 5.4 Adherence to PRD Section 9 Safety Rules
 All generated advice satisfies four non-negotiable criteria verified in `docs/explainer_checklist.md`:

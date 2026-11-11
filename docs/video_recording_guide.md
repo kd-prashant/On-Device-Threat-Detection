@@ -40,7 +40,7 @@
     python -m src.ui.cli "http://192.168.1.55/paypal.com/security.top"
     ```
   * **Spoken Script (Speaker 2):**
-    > *"Let's test an incoming phishing URL trying to impersonate PayPal using a raw IP address and a suspicious top-level domain. Notice that in just 12 milliseconds, SentinelEdge extracts 19 static lexical and Shannon entropy features, flags it as PHISHING with 98% confidence, links it to MITRE ATT&CK Mobile Technique T1566.002, and instructs the user never to submit credentials."*
+    > *"Let's test an incoming phishing URL trying to impersonate PayPal using a raw IP address and a suspicious top-level domain. Notice that in just 12 milliseconds, SentinelEdge extracts 19 static lexical and Shannon entropy features, flags it as PHISHING with 98% confidence, links it to MITRE ATT&CK Mobile Technique T1660, and instructs the user never to submit credentials."*
 * **Step 2: Smishing SMS Urgency Test**
   * Type `2` in the menu or execute:
     ```bash
@@ -102,3 +102,4 @@
 3. **Phone Capture:** Use scrcpy (`scrcpy -m 1024`) or record the phone screen using Android's native screen recorder while recording a camera view of the physical device to show Airplane Mode.
 4. **Audio Quality:** Use a USB condenser microphone or a good headset mic in a quiet room. Avoid room echo and keyboard typing clatter.
 5. **No Long Pauses:** Edit out long compilation pauses or typos using simple jump cuts.
+

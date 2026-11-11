@@ -16,11 +16,11 @@ This document provides the formal audit record certifying that **SentinelEdge** 
 
 | ID | Requirement Area | Target Specification | Measured / Audited Status | Compliance |
 |:---|:---|:---|:---|:---:|
-| **FR-1** | Phishing URL Detector | URL in $\rightarrow$ verdict + confidence out. Works 100% offline. | HistGradientBoosting (19 lexical features): Test F1 = **0.8649**, Latency = **2.00 ms**. Zero internet packets. | **PASS ✅** |
-| **FR-2** | Scam SMS Detector | Text in $\rightarrow$ verdict + confidence out. Works 100% offline. | Calibrated LogisticRegression + TF-IDF: Test F1 = **0.9444**, Latency = **0.95 ms**. FNR reduced by 47%. | **PASS ✅** |
-| **FR-3** | Network Anomaly Detector| Flow record in $\rightarrow$ verdict + confidence out. Works 100% offline. | Boosted Forest (NSL-KDD 41 features): Test F1 = **0.7893**, Latency = **1.62 ms**. Zero data leakage. | **PASS ✅** |
+| **FR-1** | Phishing URL Detector | URL in $\rightarrow$ verdict + confidence out. Works 100% offline. | HistGradientBoosting (19 lexical features): Test F1 = **0.8649**, Latency = **2.00 ms**. FNR reduced by 47.4% vs baseline. | **PASS ✅** |
+| **FR-2** | Scam SMS Detector | Text in $\rightarrow$ verdict + confidence out. Works 100% offline. | Calibrated LogisticRegression + TF-IDF: Test F1 = **0.9444**, Latency = **0.95 ms**. Calibrated probabilities + dense urgency metadata. | **PASS ✅** |
+| **FR-3** | Network Anomaly Detector| Flow record in $\rightarrow$ verdict + confidence out. Works 100% offline. | Boosted Forest (NSL-KDD 41 features): Test F1 = **0.7893**, Latency = **1.62 ms**. FNR reduced by 15.2% vs baseline. | **PASS ✅** |
 | **FR-4** | Threat Explainer (LLM) | Plain-language reasoning explaining deceptive mechanics. | Dual-mode: ExecuTorch Llama 3.2 1B Instruct (4-bit PTQ) + sub-millisecond offline heuristic stand-in. | **PASS ✅** |
-| **FR-5** | Remediation Advisor | Concrete, actionable, safe next steps (PRD Section 9). | 3 defensive steps generated per threat; mapped to **MITRE ATT&CK Mobile** (`T1566.002`, `T1476`, `T1407`). | **PASS ✅** |
+| **FR-5** | Remediation Advisor | Concrete, actionable, safe next steps (PRD Section 9). | 3 defensive steps generated per threat; mapped to **MITRE ATT&CK Mobile** (`T1660`, `T1407`). | **PASS ✅** |
 | **FR-6** | Unified Pipeline Router| Single entry point routing URL, SMS, Network to explainer. | `src/pipeline/router.py`: `analyze(data, input_type='auto')`. Dispatches and formats output in `< 15 ms`. | **PASS ✅** |
 | **FR-7** | User Interface | Command-line dashboard first, then phone screen/app. | Interactive ANSI dashboard in `src/ui/cli.py` + full Android APK guide and Kotlin receiver in `deploy/android_guide.md`. | **PASS ✅** |
 | **FR-8** | Benchmark Evaluation | Accuracy, latency, memory, size recorded on held-out test data. | 6 models evaluated on 6,701 strictly held-out samples (`benchmarks/evaluate_all.py` $\rightarrow$ `docs/final_test_benchmarks.md`). | **PASS ✅** |
@@ -58,9 +58,9 @@ You can copy-paste the text below directly into the Bharat AI-SoC Challenge or C
 ### 3.2 Executive Abstract (250 Words)
 > *SentinelEdge is a privacy-first, 100% offline on-device mobile cyber defense assistant engineered for the Bharat AI-SoC Challenge (Problem Statement 3). Traditional mobile security applications exfiltrate private user communications (SMS messages, visited URLs, and network telemetry) to remote cloud servers, introducing severe privacy risks, network latency (500–1500ms), and complete failure in air-gapped or low-connectivity environments.*
 >
-> *SentinelEdge solves this through an asymmetric dual-engine architecture: "Small models detect, Llama explains." Microsecond-latency classical machine learning models (HistGradientBoosting and calibrated LogisticRegression) detect phishing URLs, scam SMS messages, and network intrusions locally on the Arm processor in under 15ms with < 15 MB RAM. Confirmed threats are then passed through a defensive prompt-shield to an on-device 4-bit quantized Meta Llama 3.2 1B Instruct model running via PyTorch ExecuTorch and XNNPACK. The LLM translates technical telemetry into plain-language rationales and prescribes three concrete defensive actions mapped to MITRE ATT&CK Mobile techniques (T1566.002, T1476, T1407).*
+> *SentinelEdge solves this through an asymmetric dual-engine architecture: "Small models detect, Llama explains." Microsecond-latency classical machine learning models (HistGradientBoosting and calibrated LogisticRegression) detect phishing URLs, scam SMS messages, and network intrusions locally on the Arm processor in under 15ms with < 15 MB RAM. Confirmed threats are then passed through a defensive prompt-shield to an on-device 4-bit quantized Meta Llama 3.2 1B Instruct model running via PyTorch ExecuTorch and XNNPACK. The LLM translates technical telemetry into plain-language rationales and prescribes three concrete defensive actions mapped to MITRE ATT&CK Mobile techniques (T1660, T1407).*
 >
-> *Evaluated on 6,701 strictly held-out test samples across three benchmark datasets (PhishTank, UCI SMS Spam, NSL-KDD), SentinelEdge achieved Test F1 scores of 0.8649 (URL), 0.9444 (SMS), and 0.7893 (Network), cutting missed threats by 47%. The entire system enforces a zero-permission Android security architecture (removing `android.permission.INTERNET`) and operates within a 1.09 GB peak RAM footprint, guaranteeing zero cloud egress and robust defense on budget 4 GB RAM Android smartphones.*
+> *Evaluated on 6,701 strictly held-out test samples across three benchmark datasets (PhishTank, UCI SMS Spam, NSL-KDD), SentinelEdge achieved Test F1 scores of 0.8649 (URL), 0.9444 (SMS), and 0.7893 (Network), cutting missed phishing URLs by 47.4%. The entire system enforces a zero-permission Android security architecture (removing `android.permission.INTERNET`) and operates within a 1.09 GB peak RAM footprint budget, guaranteeing zero cloud egress and robust defense on budget 4 GB RAM Android smartphones.*
 
 ### 3.3 Core Innovations That Make SentinelEdge Standout
 1. **Zero-Dependency Edge Runtime (`deploy/edge_runtime.py`):** Model weights are compressed into a 230 KB portable parameter format, executing TF-IDF vectorization and calibrated probability inference in 0.95ms with 100.00% verified mathematical parity to Scikit-learn, eliminating 150 MB of library overhead.
@@ -94,3 +94,4 @@ python -m benchmarks.evaluate_all
 # Step 6: Launch interactive terminal defense dashboard
 python -m src.ui.cli
 ```
+
