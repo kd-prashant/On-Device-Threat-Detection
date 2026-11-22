@@ -1,12 +1,8 @@
 <div align="center">
 
-<!-- PROJECT LOGO & DYNAMIC ANIMATED HERO -->
 <br>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Shield.svg" width="90" height="90" alt="SentinelEdge Logo" />
-</p>
 
-# ⚡ S E N T I N E L · E D G E ⚡
+# 🛡️ S E N T I N E L · E D G E 🛡️
 ### *Next-Generation Autonomous On-Device Cyber Defense & Explainable AI Assistant*
 **Targeting 64-Bit Arm / Android Silicon • 100% Air-Gapped Offline • Zero Cloud Telemetry • Sub-15ms Edge Inference**
 
