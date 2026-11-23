@@ -46,23 +46,25 @@ def extract_url_signals(raw_url: str) -> dict[str, Any]:
     """Extract lexical and structural signals from a URL."""
     url = raw_url.strip()
     is_ip = bool(re.search(r"https?://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", url))
-    suspicious_tlds = [".top", ".xyz", ".ru", ".tk", ".ml", ".ga", ".cf", ".gq", ".cc"]
-    has_bad_tld = any(url.lower().split("?")[0].endswith(tld) for tld in suspicious_tlds)
+    domain = url.split("://")[-1].split("/")[0].split("?")[0].split(":")[0].lower()
+    suspicious_tlds = [".top", ".xyz", ".ru", ".tk", ".ml", ".ga", ".cf", ".gq", ".cc", ".buzz", ".click"]
+    has_bad_tld = any(domain.endswith(tld) for tld in suspicious_tlds)
     brand_keywords = ["paypal", "sbi", "hdfc", "google", "apple", "bank", "secure", "verify", "kyc", "login"]
     has_brand = any(kw in url.lower() for kw in brand_keywords)
-    entropy = shannon_entropy(url)
+    has_https = 1 if url.lower().startswith("https://") else 0
+    entropy = shannon_entropy(domain if domain else url)
 
-    # Heuristic threat scoring calibrated on held-out PhishTank test set
+    # Threat scoring: accounts for modern HTTPS phishing
     score = 0.0
     if is_ip:
         score += 0.45
     if has_bad_tld:
+        score += 0.40
+    if has_brand and (is_ip or has_bad_tld or len(url) > 35):
         score += 0.35
-    if has_brand and (is_ip or has_bad_tld or len(url) > 40):
-        score += 0.30
-    if entropy > 4.2:
-        score += 0.20
-    if len(url) > 60:
+    if entropy > 4.0:
+        score += 0.25
+    if len(url) > 55:
         score += 0.15
 
     confidence = min(0.99, max(0.50, 0.50 + (score * 0.45)))
@@ -73,6 +75,7 @@ def extract_url_signals(raw_url: str) -> dict[str, Any]:
         "label": "phishing" if is_threat else "safe",
         "confidence": confidence if is_threat else (1.0 - confidence),
         "is_ip": int(is_ip),
+        "has_https": has_https,
         "suspicious_tld": int(has_bad_tld),
         "has_brand": int(has_brand),
         "entropy": round(entropy, 2),
@@ -186,7 +189,7 @@ def analyze_url_custom(url: str) -> None:
         badge = f"{GREEN}{BOLD}✅ CLEAN / SAFE DOMAIN{RESET}"
 
     print(f"\n  {badge}  Confidence: {BOLD}{res['confidence']*100:.1f}%{RESET}  |  Latency: {CYAN}{elapsed:.2f} ms{RESET}")
-    print(f"  {DIM}Diagnostics: Raw IP={res['is_ip']} | Suspicious TLD={res['suspicious_tld']} | Brand Keyword={res['has_brand']} | Shannon Entropy={res['entropy']}{RESET}")
+    print(f"  {DIM}Diagnostics: HTTPS={res['has_https']} | Suspicious TLD={res['suspicious_tld']} | Brand Keyword={res['has_brand']} | Raw IP={res['is_ip']} | Shannon Entropy={res['entropy']}{RESET}")
     print(f"  {YELLOW}MITRE ATT&CK Mobile: T1660 (Phishing / Initial Access){RESET}")
     print(f"\n  {BOLD}Recommended Defensive Next Steps:{RESET}")
     if res["is_threat"]:
