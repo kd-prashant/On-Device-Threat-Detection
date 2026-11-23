@@ -44,27 +44,61 @@ def shannon_entropy(s: str) -> float:
 
 def extract_url_signals(raw_url: str) -> dict[str, Any]:
     """Extract lexical and structural signals from a URL."""
-    url = raw_url.strip()
+    url = raw_url.strip().lower()
+    domain = url.split("://")[-1].split("/")[0].split("?")[0].split(":")[0]
+    has_https = 1 if url.startswith("https://") else 0
     is_ip = bool(re.search(r"https?://\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", url))
-    domain = url.split("://")[-1].split("/")[0].split("?")[0].split(":")[0].lower()
-    suspicious_tlds = [".top", ".xyz", ".ru", ".tk", ".ml", ".ga", ".cf", ".gq", ".cc", ".buzz", ".click"]
-    has_bad_tld = any(domain.endswith(tld) for tld in suspicious_tlds)
-    brand_keywords = ["paypal", "sbi", "hdfc", "google", "apple", "bank", "secure", "verify", "kyc", "login"]
-    has_brand = any(kw in url.lower() for kw in brand_keywords)
-    has_https = 1 if url.lower().startswith("https://") else 0
+
+    # Official verified domain whitelist
+    legit_domains = {
+        "google.com", "www.google.com", "apple.com", "www.apple.com",
+        "paypal.com", "www.paypal.com", "sbi.co.in", "www.sbi.co.in",
+        "onlinesbi.sbi", "iitd.ac.in", "www.iitd.ac.in", "github.com",
+        "www.github.com", "microsoft.com", "www.microsoft.com",
+    }
+    is_verified_domain = (
+        domain in legit_domains
+        and not any(fake in domain for fake in ["-login", "-verify", "-kyc", "fake", "update"])
+    )
+    if is_verified_domain:
+        return {
+            "is_threat": False,
+            "label": "safe",
+            "confidence": 0.95,
+            "is_ip": 0,
+            "has_https": has_https,
+            "suspicious_tld": 0,
+            "has_brand": 0,
+            "entropy": round(shannon_entropy(domain), 2),
+            "url_length": len(raw_url),
+        }
+
+    # High-abuse TLDs and deceptive hyphenated TLD tokens
+    suspicious_tlds = ["xyz", "top", "ru", "tk", "ml", "ga", "cf", "gq", "cc", "buzz", "click", "fit", "rest"]
+    has_bad_tld = any(
+        domain.endswith("." + t) or ("-" + t) in domain or ("." + t + ".") in domain
+        for t in suspicious_tlds
+    )
+
+    # Credential harvesting and brand impersonation cues
+    brand_keywords = ["paypal", "sbi", "hdfc", "google", "apple", "bank", "secure", "verify", "kyc", "login", "portal", "account", "otp", "card"]
+    matched_brands = [kw for kw in brand_keywords if kw in url]
+    has_brand = len(matched_brands) > 0
     entropy = shannon_entropy(domain if domain else url)
 
-    # Threat scoring: accounts for modern HTTPS phishing
+    # Multi-signal Threat Scoring
     score = 0.0
     if is_ip:
         score += 0.45
     if has_bad_tld:
         score += 0.40
-    if has_brand and (is_ip or has_bad_tld or len(url) > 35):
-        score += 0.35
+    if len(matched_brands) >= 2:
+        score += 0.50  # Multiple credential/brand targets (e.g. sbi + login + verify)
+    elif len(matched_brands) == 1:
+        score += 0.25
     if entropy > 4.0:
         score += 0.25
-    if len(url) > 55:
+    if len(raw_url) > 50:
         score += 0.15
 
     confidence = min(0.99, max(0.50, 0.50 + (score * 0.45)))
@@ -79,7 +113,7 @@ def extract_url_signals(raw_url: str) -> dict[str, Any]:
         "suspicious_tld": int(has_bad_tld),
         "has_brand": int(has_brand),
         "entropy": round(entropy, 2),
-        "url_length": len(url),
+        "url_length": len(raw_url),
     }
 
 
