@@ -68,6 +68,7 @@ models/*
 !models/.gitkeep
 deploy/exported_models/*
 !deploy/exported_models/.gitkeep
+!deploy/exported_models/sms_detector_portable.json
 
 # IDE and OS files
 .vscode/
