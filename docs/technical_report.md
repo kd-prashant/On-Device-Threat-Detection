@@ -1,7 +1,19 @@
-# 🛡️ SentinelEdge: Technical Report
+# SentinelEdge: Technical Report
 ## On-Device Cyber Threat Detection and Explainable AI Assistant for Mobile Systems
-**Academic & Engineering Technical Report (PRD Section 11 & WP6)**  
-*Target Platform: Arm / Android SoC Architecture • Zero Cloud Telemetry • Sub-15ms Latency Budget*
+**Phase 1 — Open Qualifying Technical Report • Bharat AI-SoC Challenge 2026–27 (Problem Statement 3)**
+
+### National Institute of Technology, Uttarakhand
+**Department of Computer Science and Engineering**  
+**Course:** CSL528 — Cryptography and Network Security  
+**Mentor:** Dr. Sneha Chauhan  
+
+**Team Members:**
+* **Jensi Ghadiya (Leader)** — `MT26CSE014`
+* **Prashant Kandapal** — `MT26CSE020`
+* **Priyanshu Badoni** — `MT26CSE018`
+
+**Project Repository:** `https://github.com/kd-prashant/On-Device-Threat-Detection`  
+**Date of Submission:** 23 November 2026  
 
 ---
 
@@ -43,60 +55,37 @@ In accordance with the project PRD (CSL528 / Bharat AI-SoC Challenge), SentinelE
 
 SentinelEdge adopts a decoupled two-tier architecture separating high-throughput classification from natural language reasoning:
 
-```
-                          ┌──────────────────────────────────────────────┐
-                          │         Incoming Untrusted Payload           │
-                          │      (URL String, SMS Text, Flow Dict)       │
-                          └──────────────────────┬───────────────────────┘
-                                                 │
-                                                 ▼
-                          ┌──────────────────────────────────────────────┐
-                          │      Unified Pipeline Dispatcher (FR-6)      │
-                          │         `src/pipeline/router.py`             │
-                          │    (Auto-Detects Modality: URL/SMS/Net)      │
-                          └───────┬──────────────┬──────────────┬────────┘
-                                  │              │              │
-                   ┌──────────────┘              │              └──────────────┐
-                   ▼                             ▼                             ▼
-        ┌────────────────────┐        ┌────────────────────┐        ┌────────────────────┐
-        │ 🔗 URL Detector    │        │ 💬 SMS Detector    │        │ 🌐 Network Detector│
-        │ HistGradientBoost  │        │ TF-IDF + Meta LR   │        │ HistGradientBoost  │
-        │ 19 Lexical Feats   │        │ Fused Text & Meta  │        │ 41 Flow Attributes │
-        │ Latency: 5.16 ms   │        │ Latency: 4.89 ms   │        │ Latency: 9.34 ms   │
-        └─────────┬──────────┘        └──────────┬─────────┘        └──────────┬─────────┘
-                  │                              │                             │
-                  └──────────────────────┬───────┴─────────────────────────────┘
-                                         │
-                                         ▼
-                          ┌──────────────────────────────────────────────┐
-                          │   Detection Telemetry: Verdict, Confidence   │
-                          │   and Extracted Salient Features             │
-                          └──────────────────────┬───────────────────────┘
-                                                 │
-                                                 ▼
-                          ┌──────────────────────────────────────────────┐
-                          │   Defensive Prompt Shield (PRD Section 9)    │
-                          │   • Delimiter Isolation (### UNTRUSTED ###)  │
-                          │   • Anti-Prompt-Injection Signature Filter   │
-                          │   • Breakout Token Sanitizer (<|eot_id|>)    │
-                          └──────────────────────┬───────────────────────┘
-                                                 │
-                                                 ▼
-                          ┌──────────────────────────────────────────────┐
-                          │      Tier 2: Threat Explainer Engine         │
-                          │  • ExecuTorch Llama 3.2 1B (4-bit Mobile)    │
-                          │  • RuleHeuristicExplainer (PC Stand-in)      │
-                          │  • MITRE ATT&CK Mobile Mapping (T1660/T1407) │
-                          └──────────────────────┬───────────────────────┘
-                                                 │
-                                                 ▼
-                          ┌──────────────────────────────────────────────┐
-                          │          Interactive Output Schema           │
-                          │  1. Categorical Verdict & Confidence Score   │
-                          │  2. Plain-English Threat Rationale           │
-                          │  3. Exactly 3 Concrete Defensive Steps       │
-                          │  4. MITRE Technique & Adversarial Audit Flag │
-                          └──────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    classDef ingress fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#f8fafc;
+    classDef router fill:#0284c7,stroke:#0369a1,stroke-width:2px,color:#f8fafc;
+    classDef tier1 fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#f8fafc;
+    classDef gate fill:#0f172a,stroke:#94a3b8,stroke-width:1.5px,color:#f8fafc;
+    classDef safe fill:#064e3b,stroke:#10b981,stroke-width:2px,color:#d1fae5;
+    classDef shield fill:#78350f,stroke:#f59e0b,stroke-width:2px,color:#fef3c7;
+    classDef tier2 fill:#022c22,stroke:#34d399,stroke-width:2px,color:#f8fafc;
+    classDef out fill:#881337,stroke:#f43f5e,stroke-width:2px,color:#f8fafc;
+
+    IN["📥 Multi-Modal Untrusted Ingress Stream\n(Inbound SMS, Web URLs, Bidirectional Flow Records)"]:::ingress --> ROUTER{"🔀 Unified Modality Router\n(src/pipeline/router.py)"}:::router
+
+    subgraph TIER1 ["⚡ TIER 1: Microsecond Edge Intelligence (< 5ms on Mobile CPU • Combined RAM < 0.5 MB)"]
+        ROUTER -->|"Web URL"| URL_DET["🔗 URL Phishing Detector\n• HistGradientBoosting\n• 19 Lexical & Shannon Entropy Cues\n• Latency: 1.81 ms | Disk: 122 KB"]:::tier1
+        ROUTER -->|"SMS Text"| SMS_DET["💬 SMS Smishing Detector\n• Calibrated Logistic Regression\n• Sublinear TF-IDF + 10 Behavioral Cues\n• Latency: 2.40 ms | Disk: 230 KB"]:::tier1
+        ROUTER -->|"Flow Dict"| NET_DET["🌐 Network Intrusion Detector\n• HistGradientBoosting\n• 41 NSL-KDD Flow Attributes\n• Latency: 4.01 ms | Disk: 94 KB"]:::tier1
+    end
+
+    URL_DET --> GATE["📊 Calibrated Decision Gate & Threshold Evaluator"]:::gate
+    SMS_DET --> GATE
+    NET_DET --> GATE
+
+    GATE -->|"Verdict == BENIGN"| PASS["✅ Silent Safe Pass (< 0.5 ms)"]:::safe
+    GATE -->|"Verdict == THREAT"| SHIELD["🛡️ Adversarial Delimiter Prompt Shield\n• Immutable Delimiters: ### BEGIN UNTRUSTED DATA ###\n• Delimiter Breakout & Template Token Sanitization"]:::shield
+
+    subgraph TIER2 ["🧠 TIER 2: On-Device Threat Explainer Engine (ExecuTorch)"]
+        SHIELD --> LLAMA["🦙 Meta Llama 3.2 1B Instruct\n• 4-Bit Groupwise PTQ (XNNPACK Engine on Arm)\n• Plain-English Rationale (< 80 words)\n• Exactly 3 Actionable Defensive Next Steps\n• MITRE ATT&CK Mobile Mapping (T1660 / T1407)"]:::tier2
+    end
+
+    LLAMA --> OUT["📱 On-Device Security Advisory Output\n(Interactive Terminal HUD & Mobile Push Advisory)"]:::out
 ```
 
 ### 2.1 Unified Pipeline Dispatcher (`src/pipeline/router.py`)

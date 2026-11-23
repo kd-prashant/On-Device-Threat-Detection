@@ -6,12 +6,12 @@ This report documents evaluation on strictly held-out test sets (10% split, `see
 
 | Threat | Architecture | Samples | Accuracy | Precision | Recall | F1 | FNR | Latency | Size |
 |:---|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `URL` | URL Baseline (LogisticRegression) | 1143 | 78.65% | 84.86% | 69.70% | 0.7654 | 30.30% | 0.85 ms | 0.00 MB |
-| `URL` | **URL Improved (HistGradientBoosting)** | 1143 | **86.88%** | **89.05%** | **84.06%** | **0.8649** | **15.94%** | **2.00 ms** | **0.12 MB** |
-| `SMS` | SMS Baseline (MultinomialNB) | 558 | 98.92% | 98.59% | 93.33% | 0.9589 | 6.67% | 0.45 ms | 0.30 MB |
-| `SMS` | **SMS Improved (TF-IDF + Metadata)** | 558 | **98.57%** | **98.55%** | **90.67%** | **0.9444** | **9.33%** | **2.38 ms** | **0.28 MB** |
+| `URL` | URL Baseline (LogisticRegression) | 1143 | 78.65% | 84.86% | 69.70% | 0.7654 | 30.30% | 0.72 ms | 0.00 MB |
+| `URL` | **URL Improved (HistGradientBoosting)** | 1143 | **86.88%** | **89.05%** | **84.06%** | **0.8649** | **15.94%** | **1.80 ms** | **0.12 MB** |
+| `SMS` | SMS Baseline (MultinomialNB) | 558 | 98.92% | 98.59% | 93.33% | 0.9589 | 6.67% | 0.46 ms | 0.30 MB |
+| `SMS` | **SMS Improved (TF-IDF + Metadata)** | 558 | **98.57%** | **98.55%** | **90.67%** | **0.9444** | **9.33%** | **2.40 ms** | **0.28 MB** |
 | `NETWORK` | Network Baseline (LogisticRegression) | 5000 | 74.48% | 91.58% | 60.75% | 0.7305 | 39.25% | 2.37 ms | 0.01 MB |
-| `NETWORK` | **Network Improved (HistGradientBoosting)** | 5000 | **79.72%** | **96.59%** | **66.73%** | **0.7893** | **33.27%** | **4.32 ms** | **0.09 MB** |
+| `NETWORK` | **Network Improved (HistGradientBoosting)** | 5000 | **79.72%** | **96.59%** | **66.73%** | **0.7893** | **33.27%** | **4.01 ms** | **0.09 MB** |
 
 ## 2. Detailed Confusion Matrices (Held-Out Test Sets)
 
